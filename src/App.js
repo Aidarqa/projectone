@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext, useEffect } from "react";
+import "./App.css";
+import AddTodo from "./components/AddTodo";
+import TodoList from "./components/TodoList";
+import { todoContext } from "./contexts/todoContext";
 
 function App() {
+
+
+  const {todoData:todos,getTodos, editTodo, addTodo,deleteTodo} = useContext(todoContext)
+
+
+  useEffect(() => {
+   getTodos();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddTodo addTodo={addTodo} editTodo={editTodo} />
+      <TodoList/>
     </div>
   );
 }
